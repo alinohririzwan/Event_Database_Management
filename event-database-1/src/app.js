@@ -8,10 +8,10 @@ const PORT = process.env.PORT || 3000;
 
 // PostgreSQL pool setup
 const pool = new Pool({
-    user: 'your_nhost_db_user',
-    host: 'your_nhost_db_host',
-    database: 'your_nhost_db_name',
-    password: 'your_nhost_db_password',
+    user: 'postgres', // Change to your Nhost DB user
+    host: 'ostmpjoicdvtsfvyybtp.db.eu-central-1.nhost.run', // Change to your Nhost DB host
+    database: 'ostmpjoicdvtsfvyybtp', // Change to your Nhost DB name
+    password: 'Passwordpassword1',
     port: 5432,
     ssl: { rejectUnauthorized: false }
 });
