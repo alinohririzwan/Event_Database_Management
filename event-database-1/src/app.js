@@ -6,11 +6,11 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// PostgreSQL pool setup
+// PostgreSQL pool setup (Nhost)
 const pool = new Pool({
-    user: 'postgres', // Change to your Nhost DB user
-    host: 'ostmpjoicdvtsfvyybtp.db.eu-central-1.nhost.run', // Change to your Nhost DB host
-    database: 'ostmpjoicdvtsfvyybtp', // Change to your Nhost DB name
+    user: 'postgres',
+    host: 'ostmpjoicdvtsfvyybtp.db.eu-central-1.nhost.run',
+    database: 'ostmpjoicdvtsfvyybtp',
     password: 'Passwordpassword1',
     port: 5432,
     ssl: { rejectUnauthorized: false }
@@ -31,18 +31,19 @@ pool.query(`
     }
 });
 
-// Make pool available to routes/models if needed
 app.locals.pool = pool;
 
-// Serve static files from the correct frontend directory
+// Serve static files from frontend directory
 app.use(express.static(path.join(__dirname, '../../event-database')));
 
 app.use(express.json());
 app.use('/api/events', eventRoutes);
 
+// Optional: Serve index.html for all other routes (SPA support)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../event-database/index.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-// Added for starting the application from a specific directory
-process.chdir('F:\\code\\Event_Database_Management\\event-database-1');
