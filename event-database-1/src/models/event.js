@@ -4,16 +4,19 @@ const pool = new Pool({
     host: 'localhost',
     user: 'postgres',
     password: 'password',
-    database: 'event_database', // Make sure to create this database in PostgreSQL
+    database: 'event_database',
     port: 5432,
 });
 
 const Event = {
-    create: async (eventName, eventDate) => {
-        const result = await pool.query('INSERT INTO events (name, date) VALUES ($1, $2) RETURNING *', [eventName, eventDate]);
+    create: async ({ name, date }) => {
+        const result = await pool.query(
+            'INSERT INTO events (name, date) VALUES ($1, $2) RETURNING *',
+            [name, date]
+        );
         return result.rows[0];
     },
-    getAll: async () => {
+    findAll: async () => {
         const result = await pool.query('SELECT * FROM events');
         return result.rows;
     },
@@ -21,12 +24,16 @@ const Event = {
         const result = await pool.query('SELECT * FROM events WHERE id = $1', [id]);
         return result.rows[0];
     },
-    update: async (id, eventName, eventDate) => {
-        const result = await pool.query('UPDATE events SET name = $1, date = $2 WHERE id = $3 RETURNING *', [eventName, eventDate, id]);
+    update: async (id, { name, date }) => {
+        const result = await pool.query(
+            'UPDATE events SET name = $1, date = $2 WHERE id = $3 RETURNING *',
+            [name, date, id]
+        );
         return result.rows[0];
     },
     delete: async (id) => {
         await pool.query('DELETE FROM events WHERE id = $1', [id]);
+        return { message: 'Event deleted' };
     }
 };
 
