@@ -8,11 +8,12 @@ const PORT = process.env.PORT || 3000;
 
 // PostgreSQL pool setup
 const pool = new Pool({
-    user: 'postgres',         // <-- Replace with your username
-    host: 'localhost',
-    database: 'event_database', // <-- Replace with your database name
-    password: 'password',     // <-- Replace with your password
+    user: 'your_nhost_db_user',
+    host: 'your_nhost_db_host',
+    database: 'your_nhost_db_name',
+    password: 'your_nhost_db_password',
     port: 5432,
+    ssl: { rejectUnauthorized: false }
 });
 
 // Create events table if it doesn't exist
@@ -33,8 +34,8 @@ pool.query(`
 // Make pool available to routes/models if needed
 app.locals.pool = pool;
 
-// Serve static files from the parent 'event-database' directory
-app.use(express.static(path.join(__dirname, '..')));
+// Serve static files from the correct frontend directory
+app.use(express.static(path.join(__dirname, '../../event-database')));
 
 app.use(express.json());
 app.use('/api/events', eventRoutes);
@@ -42,3 +43,6 @@ app.use('/api/events', eventRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+// Added for starting the application from a specific directory
+process.chdir('F:\\code\\Event_Database_Management\\event-database-1');
