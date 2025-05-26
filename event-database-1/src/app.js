@@ -2,6 +2,7 @@ const express = require('express');
 const eventRoutes = require('./routes/events');
 const { Pool } = require('pg');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,18 +17,19 @@ const pool = new Pool({
     ssl: { rejectUnauthorized: false }
 });
 
-// Create events table if it doesn't exist
+// Drop and recreate events table
 pool.query(`
-    CREATE TABLE IF NOT EXISTS events (
+    DROP TABLE IF EXISTS events;
+    CREATE TABLE events (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         date DATE NOT NULL
     );
 `, (err) => {
     if (err) {
-        console.error('Error creating table:', err);
+        console.error('Error setting up table:', err);
     } else {
-        console.log('Events table is ready.');
+        console.log('Events table is set up.');
     }
 });
 
@@ -38,6 +40,7 @@ app.use(express.static(path.join(__dirname, '../../event-database')));
 console.log('Serving static files from:', path.join(__dirname, '../../event-database'));
 
 app.use(express.json());
+app.use(cors());
 app.use('/api/events', eventRoutes);
 
 // Optional: Serve index.html for all other routes (SPA support)
