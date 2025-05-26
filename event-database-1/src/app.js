@@ -35,6 +35,7 @@ app.locals.pool = pool;
 
 // Serve static files from frontend directory
 app.use(express.static(path.join(__dirname, '../../event-database')));
+console.log('Serving static files from:', path.join(__dirname, '../../event-database'));
 
 app.use(express.json());
 app.use('/api/events', eventRoutes);
