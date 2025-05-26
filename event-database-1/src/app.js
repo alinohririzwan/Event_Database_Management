@@ -1,6 +1,7 @@
 const express = require('express');
 const eventRoutes = require('./routes/events');
 const { Pool } = require('pg');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -31,6 +32,9 @@ pool.query(`
 
 // Make pool available to routes/models if needed
 app.locals.pool = pool;
+
+// Serve static files from the parent 'event-database' directory
+app.use(express.static(path.join(__dirname, '..')));
 
 app.use(express.json());
 app.use('/api/events', eventRoutes);
