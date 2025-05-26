@@ -1,0 +1,18 @@
+{
+  "name": "event-database",
+  "version": "1.0.0",
+  "description": "This project is an Event Database web application that allows users to manage and organize events. Users can add, display, and manage events through a user-friendly interface.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "pg": "^8.16.0"
+  }
+}

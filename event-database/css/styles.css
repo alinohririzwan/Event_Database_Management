@@ -1,0 +1,115 @@
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 500px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(60, 72, 88, 0.15);
+    padding: 32px 28px 24px 28px;
+}
+
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #4f46e5;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+
+#event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+input[type="text"], input[type="date"] {
+    padding: 10px 14px;
+    border: 1px solid #c7d2fe;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+
+input[type="text"]:focus, input[type="date"]:focus {
+    border: 1.5px solid #6366f1;
+    outline: none;
+}
+
+button[type="submit"] {
+    background: linear-gradient(90deg, #6366f1 60%, #818cf8 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, #4f46e5 60%, #6366f1 100%);
+    transform: translateY(-2px) scale(1.03);
+}
+
+#event-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.event {
+    background: #f1f5f9;
+    border-radius: 10px;
+    padding: 18px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.07);
+    transition: box-shadow 0.2s;
+}
+
+.event:hover {
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.13);
+}
+
+.event strong {
+    color: #3730a3;
+    font-size: 1.08rem;
+}
+
+.delete-btn {
+    background: #f87171;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 16px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+    transform: scale(1.07);
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
+}
