@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const eventRoutes = require('./routes/events');
 const { Pool } = require('pg');
 
@@ -8,10 +7,10 @@ const PORT = process.env.PORT || 3000;
 
 // PostgreSQL pool setup
 const pool = new Pool({
-    user: 'your_username',
+    user: 'postgres',         // <-- Replace with your username
     host: 'localhost',
-    database: 'your_database',
-    password: 'your_password',
+    database: 'event_database', // <-- Replace with your database name
+    password: 'password',     // <-- Replace with your password
     port: 5432,
 });
 
@@ -30,7 +29,10 @@ pool.query(`
     }
 });
 
-app.use(bodyParser.json());
+// Make pool available to routes/models if needed
+app.locals.pool = pool;
+
+app.use(express.json());
 app.use('/api/events', eventRoutes);
 
 app.listen(PORT, () => {
